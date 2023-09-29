@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 import auth from "../../firebase/firebase.config";
 import { useState } from "react";
 import { FaEye,FaEyeSlash } from 'react-icons/fa';
@@ -43,6 +43,13 @@ const Register = () => {
         .then(result=>{
             console.log(result.user);
             setSuccess('Your account Successfully created');
+
+            // How send verification email
+
+            sendEmailVerification(result.user)
+           .then(()=>{
+            alert('please check your mail and verify your account ')
+           })
 
         
         })
